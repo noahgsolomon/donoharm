@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
     <div className=" absolute top-8 left-0 right-0 border rounded-lg shadow-sm p-2 flex justify-between w-[800px] max-w-[90%] items-center mx-auto bg-card">
       <img
-        className="w-[70px] h-[70px] rounded-full border"
+        className="w-[50px] h-[50px] rounded-full border"
         alt="donoharm"
         src="/donoharm.png"
       />
