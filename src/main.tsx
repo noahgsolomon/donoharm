@@ -1,11 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
-import { Toaster } from "./components/ui/sonner.tsx";
+import { Toaster } from "@/components/ui/sonner.tsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "./Pages/Home/Home.tsx";
+import "./globals.css";
+import Error from "./Pages/Error/Error.tsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    errorElement: <Error />,
+  },
+  {
+    path: "/dashboard",
+    element: <div>hi</div>,
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
     <Toaster richColors position="top-center" />
-  </React.StrictMode>,
+  </React.StrictMode>
 );
