@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: 'Krypton';
+    src: url('/krypton.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 @layer base {
     :root {
         --background: 0 0% 100%;
@@ -32,7 +39,7 @@
         --input: 240 5.9% 90%;
         --ring: 240 10% 3.9%;
 
-        --radius: 0.5rem;
+        --radius: 1rem;
     }
 
     .dark {
