@@ -6,7 +6,7 @@ export default function Navbar() {
       <img
         className="w-[50px] h-[50px] rounded-full border"
         alt="donoharm"
-        src="/donoharm.png"
+        src="/donoharm.webp"
       />
       <div className="flex flex-row gap-2">
         <Button variant={"outline"}>Log in</Button>
