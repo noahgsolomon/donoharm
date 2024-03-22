@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Heart, MessageCircle, Skull } from "lucide-react";
+import { Heart, Skull } from "lucide-react";
 
 export default function PostCard({
   text,
