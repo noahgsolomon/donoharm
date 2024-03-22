@@ -19,6 +19,7 @@ module.exports = {
     extend: {
       fontFamily: {
         krypton: ["Krypton", "sans-serif"],
+        argon: ["Argon", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
