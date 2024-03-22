@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Pages/Home/Home.tsx";
 import "./globals.css";
 import Error from "./Pages/Error/Error.tsx";
+import Dashboard from "./Pages/Dashboard/Dashboard.tsx";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <div>hi</div>,
+    element: <Dashboard />,
   },
 ]);
 
