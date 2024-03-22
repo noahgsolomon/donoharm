@@ -6,6 +6,7 @@ import Home from "./Pages/Home/Home.tsx";
 import "./globals.css";
 import Error from "./Pages/Error/Error.tsx";
 import Dashboard from "./Pages/Dashboard/Dashboard.tsx";
+import { TooltipProvider } from "./components/ui/tooltip.tsx";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,9 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <TooltipProvider delayDuration={500}>
+      <RouterProvider router={router} />
+    </TooltipProvider>
     <Toaster richColors position="top-center" />
   </React.StrictMode>
 );
