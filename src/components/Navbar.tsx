@@ -1,13 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from './ui/button';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Button, buttonVariants } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "./ui/dropdown-menu";
+import useUserStore from "@/UserStore";
 
-interface NavbarProps {
-  isLoggedIn: boolean;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ isLoggedIn, setIsLoggedIn }) => {
+export default function Navbar() {
+  const isLoggedIn = useUserStore((state) => state.isLoggedIn);
+  const setIsLoggedIn = useUserStore((state) => state.setIsLoggedIn);
   return (
     <>
       <div className="absolute top-8 left-0 right-0 border rounded-lg shadow-sm p-2 flex justify-between w-[800px] max-w-[90%] items-center mx-auto bg-card">
@@ -25,13 +29,38 @@ const Navbar: React.FC<NavbarProps> = ({ isLoggedIn, setIsLoggedIn }) => {
         <div className="flex flex-row gap-2">
           {isLoggedIn ? (
             <>
-              {}
-              <Button variant="outline" onClick={() => setIsLoggedIn(false)}>Log out</Button>
+              <div className="flex flex-row gap-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <img
+                      src="/pfp-15.webp"
+                      alt="profile"
+                      className="cursor-pointer rounded-full border w-[50px] h-[50px]"
+                    />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem asChild>
+                      <Link to={"/"} onClick={() => setIsLoggedIn(false)}>
+                        Log out
+                      </Link>
+                    </DropdownMenuItem>
+                    {/* <DropdownMenuItem className="text-red-500 cursor-pointer">
+                      Delete Account
+                    </DropdownMenuItem> */}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
             </>
           ) : (
             <>
-              <Button variant="outline" onClick={() => setIsLoggedIn(true)}>Log in</Button>
-              <Button>Join us</Button>
+              <Link
+                to={"/dashboard"}
+                className={buttonVariants({ variant: "outline" })}
+                onClick={() => setIsLoggedIn(true)}
+              >
+                Log in
+              </Link>
+              {/* <Button>Join us</Button> */}
             </>
           )}
         </div>
@@ -39,31 +68,4 @@ const Navbar: React.FC<NavbarProps> = ({ isLoggedIn, setIsLoggedIn }) => {
       <div className="h-36"></div>
     </>
   );
-};
-
-export default Navbar;
-
-{
-  /**
-<div className="flex flex-row gap-2">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <img
-                src="/pfp-15.webp"
-                alt="profile"
-                className="cursor-pointer rounded-full border w-[50px] h-[50px]"
-              />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem className="cursor-pointer">
-                Log out
-              </DropdownMenuItem>
-              <DropdownMenuItem className="text-red-500 cursor-pointer">
-                Delete Account
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-*/
 }
-
