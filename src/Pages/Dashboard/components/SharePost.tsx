@@ -16,8 +16,24 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import usePostStore from "@/PostStore";
+import { useState } from "react";
+import { toast } from "sonner";
+import { DialogClose } from "@radix-ui/react-dialog";
 
 export default function SharePost() {
+  const [text, setText] = useState("");
+  const setPosts = usePostStore((state) => state.setPosts);
+
+  const handleAddPost = () => {
+    const newPost = {
+      name: "@unimplemented",
+      image: "/pfp-15.webp",
+      text,
+    };
+    setPosts(newPost);
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -33,7 +49,12 @@ export default function SharePost() {
           </DialogDescription>
         </DialogHeader>
         <div className="relative">
-          <Textarea className="min-h-[200px]" placeholder="// your idea here" />
+          <Textarea
+            className="min-h-[200px]"
+            placeholder="// your idea here"
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+          />
           <Tooltip>
             <TooltipTrigger asChild>
               <Button className="absolute bottom-4 left-0" variant={"none"}>
@@ -48,20 +69,29 @@ export default function SharePost() {
 
         <DialogFooter>
           <div className="flex justify-between w-full">
-            <Button
-              variant={"destructive"}
-              className="flex gap-1 items-center"
-              type="submit"
-            >
-              Cancel
-            </Button>
-            <Button
-              variant={"outline"}
-              className="flex gap-1 items-center"
-              type="submit"
-            >
-              Share
-            </Button>
+            <DialogClose>
+              <Button
+                variant={"destructive"}
+                className="flex gap-1 items-center"
+                type="submit"
+              >
+                Cancel
+              </Button>
+            </DialogClose>
+
+            <DialogClose>
+              <Button
+                onClick={() => {
+                  toast.success("uploaded post!");
+                  handleAddPost();
+                }}
+                variant={"outline"}
+                className="flex gap-1 items-center"
+                type="submit"
+              >
+                Share
+              </Button>
+            </DialogClose>
           </div>
         </DialogFooter>
       </DialogContent>
