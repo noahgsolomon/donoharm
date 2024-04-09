@@ -11,12 +11,12 @@ import {
 
 export default function PostCard({
   text,
-  imageUrl,
-  videoUrl,
+  image,
+  name,
 }: {
   text: string;
-  imageUrl?: string;
-  videoUrl?: string;
+  image: string;
+  name: string;
 }) {
   return (
     <div className="relative p-4 rounded-lg shadow-sm border w-[350px] flex flex-col items-start justify-between gap-4">
@@ -24,11 +24,11 @@ export default function PostCard({
         <div className="flex flex-row items-center gap-2">
           <img
             alt="pfp"
-            src="/pfp-1.webp"
+            src={image}
             className="rounded-full border w-[50px] h-[50px]"
           />
           <p className="font-krypton text-sm">
-            @buzzo <span className="text-xs text-primary/70"> 6h ago</span>
+            {name} <span className="text-xs text-primary/70"> 6h ago</span>
           </p>
         </div>
 
