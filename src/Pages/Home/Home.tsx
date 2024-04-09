@@ -32,7 +32,11 @@ export default function Home() {
                 view
               </Button>
             </div>
-            <PostCard text="In a world where words are weapons, Every utterance becomes a transgression." />
+            <PostCard
+              name="@bombi"
+              image="/pfp-12.webp"
+              text="In a world where words are weapons, Every utterance becomes a transgression."
+            />
           </div>
 
           <pre className="text-[6px]">
