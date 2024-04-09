@@ -74,6 +74,7 @@ export default function SharePost() {
                 variant={"destructive"}
                 className="flex gap-1 items-center"
                 type="submit"
+                onClick={() => setText("")}
               >
                 Cancel
               </Button>
@@ -84,6 +85,7 @@ export default function SharePost() {
                 onClick={() => {
                   toast.success("uploaded post!");
                   handleAddPost();
+                  setText("");
                 }}
                 variant={"outline"}
                 className="flex gap-1 items-center"
