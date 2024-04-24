@@ -4,14 +4,13 @@ const port = process.env.PORT || 8085;
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-// Import routes
 const authRoutes = require("./routes/authRoutes");
+const postRoutes = require("./routes/postRoutes");
+const userRoutes = require("./routes/userRoutes");
 
-// Middleware
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 
-// Connect to MongoDB
 const conn_str =
   "mongodb+srv://noahsolomon2003:CHjPvZvkJXv0XloN@web.kxob4fa.mongodb.net/?retryWrites=true&w=majority&appName=web";
 mongoose.set("strictQuery", false);
@@ -27,3 +26,5 @@ mongoose
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/user", userRoutes);
