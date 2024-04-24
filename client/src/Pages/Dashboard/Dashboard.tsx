@@ -7,10 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Button } from "@/components/ui/button";
-import { Brain, Plus } from "lucide-react";
 import SharePost from "./components/SharePost.tsx";
-import { useState } from "react";
 import useUserStore from "@/UserStore.tsx";
 import Error from "../Error/Error.tsx";
 import usePostStore from "@/PostStore.tsx";

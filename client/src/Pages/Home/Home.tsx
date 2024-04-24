@@ -9,7 +9,6 @@ export default function Home() {
     <>
       <Navbar />
       <div className="pt-16 flex h-full flex-col items-center justify-center">
-        {/* <p className="text-2xl font-krypton">DO NO HARM </p> */}
         <div className="flex flex-col gap-12 items-center justify-center">
           <div className="font-krypton flex flex-col items-center">
             <p className="text-5xl">DO NO HARM</p>

@@ -32,17 +32,13 @@ export function LoginForm() {
         }
       );
 
-      // Handle successful login
       const sessionToken = response.data.sessionToken;
-      // Store the session token in local storage
       localStorage.setItem("sessionToken", sessionToken);
-      // Update the user store to set isLoggedIn to true
       setIsLoggedIn(true);
       checkLoginStatus();
       navigate("/dashboard");
       console.log("Login successful");
     } catch (error) {
-      // Handle login error
       setError("Invalid email or password");
     }
   };
