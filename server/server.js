@@ -7,7 +7,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const postRoutes = require("./routes/postRoutes");
 const userRoutes = require("./routes/userRoutes");
-
+l;
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 
