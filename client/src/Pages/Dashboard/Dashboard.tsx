@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import PostCard from "./components/PostCard";
+import PostCard from "./components/PostCard.tsx";
 import {
   Carousel,
   CarouselContent,
@@ -9,10 +9,10 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { Brain, Plus } from "lucide-react";
-import SharePost from "./components/SharePost";
+import SharePost from "./components/SharePost.tsx";
 import { useState } from "react";
 import useUserStore from "@/UserStore.tsx";
-import Error from "../../Pages/Error/Error.tsx";
+import Error from "../Error/Error.tsx";
 import usePostStore from "@/PostStore.tsx";
 
 export default function Dashboard() {
