@@ -20,18 +20,45 @@ import usePostStore from "@/PostStore";
 import { useState } from "react";
 import { toast } from "sonner";
 import { DialogClose } from "@radix-ui/react-dialog";
+import axios from "axios";
+import useUserStore from "@/UserStore";
 
 export default function SharePost() {
   const [text, setText] = useState("");
-  const setPosts = usePostStore((state) => state.setPosts);
+  const { setPosts, posts } = usePostStore();
 
-  const handleAddPost = () => {
-    const newPost = {
-      name: "@unimplemented",
-      image: "/pfp-15.webp",
-      text,
-    };
-    setPosts(newPost);
+  const { username, pfp } = useUserStore();
+
+  const handleAddPost = async () => {
+    try {
+      const sessionToken = localStorage.getItem("sessionToken");
+
+      const response = await axios.post(
+        "http://localhost:8085/api/posts",
+        {
+          text,
+          image: pfp,
+        },
+        {
+          headers: {
+            Authorization: sessionToken,
+          },
+        }
+      );
+
+      const newPost = {
+        username: `@${username.split("@")[0]}`,
+        image: pfp,
+        text,
+      };
+      setPosts([...posts, newPost]);
+
+      toast.success("Post created successfully");
+      setText("");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to create post");
+    }
   };
 
   return (
@@ -83,7 +110,6 @@ export default function SharePost() {
             <DialogClose>
               <Button
                 onClick={() => {
-                  toast.success("uploaded post!");
                   handleAddPost();
                   setText("");
                 }}

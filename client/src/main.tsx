@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import { Toaster } from "@/components/ui/sonner.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -7,6 +7,9 @@ import "./globals.css";
 import Error from "./Pages/Error/Error.tsx";
 import Dashboard from "./Pages/Dashboard/Dashboard.tsx";
 import { TooltipProvider } from "./components/ui/tooltip.tsx";
+import Login from "./Pages/Login/Login.tsx";
+import Signup from "./Pages/Signup/Signup.tsx";
+import useUserStore from "./UserStore.tsx";
 
 const router = createBrowserRouter([
   {
@@ -18,13 +21,31 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard />,
   },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <TooltipProvider delayDuration={500}>
-      <RouterProvider router={router} />
-    </TooltipProvider>
-    <Toaster richColors position="top-center" />
-  </React.StrictMode>
-);
+const App = () => {
+  const checkLoginStatus = useUserStore((state) => state.checkLoginStatus);
+
+  React.useEffect(() => {
+    checkLoginStatus();
+  }, [checkLoginStatus]);
+
+  return (
+    <React.StrictMode>
+      <TooltipProvider delayDuration={0}>
+        <RouterProvider router={router} />
+      </TooltipProvider>
+      <Toaster richColors position="top-center" />
+    </React.StrictMode>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")!).render(<App />);

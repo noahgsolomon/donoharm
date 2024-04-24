@@ -14,11 +14,19 @@ import { useState } from "react";
 import useUserStore from "@/UserStore.tsx";
 import Error from "../Error/Error.tsx";
 import usePostStore from "@/PostStore.tsx";
+import HiddenPostCard from "./components/HiddenPostCard.tsx";
+import React from "react";
 
 export default function Dashboard() {
   const isLoggedIn = useUserStore((state) => state.isLoggedIn);
 
-  const posts = usePostStore((state) => state.posts);
+  const { posts, fetchPosts } = usePostStore();
+
+  console.log(posts);
+
+  React.useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts, isLoggedIn]);
 
   return (
     <>
@@ -43,9 +51,9 @@ export default function Dashboard() {
                     className="flex items-center justify-center"
                     key={index}
                   >
-                    <PostCard
+                    <HiddenPostCard
                       image={post.image}
-                      name={post.name}
+                      name={post.username}
                       text={post.text}
                     />
                   </CarouselItem>

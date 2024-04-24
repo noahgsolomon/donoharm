@@ -1,29 +1,30 @@
+import axios from "axios";
 import { create } from "zustand";
 
 interface PostState {
-  posts: { name: string; image: string; text: string }[];
-  setPosts: (post: { name: string; image: string; text: string }) => void;
+  posts: {
+    text: string;
+    image: string;
+    username: string;
+  }[];
+  setPosts: (
+    posts: { text: string; image: string; username: string }[]
+  ) => void;
+  fetchPosts: () => Promise<void>;
 }
-
 const usePostStore = create<PostState>((set) => ({
-  posts: [
-    {
-      name: "@buzzo",
-      image: "/pfp-9.webp",
-      text: "In a world where words are weapons, Every utterance becomes a transgression.",
-    },
-    {
-      name: "@jane_doe",
-      image: "/pfp-12.webp",
-      text: "The silence between the notes is where the true melody lies.",
-    },
-    {
-      name: "@john_smith",
-      image: "/pfp-11.webp",
-      text: "In the labyrinth of the mind, thoughts intertwine and dreams unwind.",
-    },
-  ],
-  setPosts: (post) => set((state) => ({ posts: [post, ...state.posts] })),
+  posts: [],
+  setPosts: (posts) => set(() => ({ posts })),
+  fetchPosts: async () => {
+    try {
+      const response = await axios.get("http://localhost:8085/api/posts");
+      if (response.status === 200) {
+        set({ posts: response.data });
+      }
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  },
 }));
 
 export default usePostStore;
